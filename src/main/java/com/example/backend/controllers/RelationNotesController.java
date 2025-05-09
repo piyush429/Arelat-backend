@@ -52,11 +52,20 @@ public class RelationNotesController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<GetRelationsResponse> Get(@PathVariable String relationId) {
+    public ResponseEntity<GetRelationNotesResponse> Get(@PathVariable String relationId) {
 
         var relations = relationNotesRepository.getAllByRelationId(relationId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(new GetRelationsResponse(relations));
+        return ResponseEntity.status(HttpStatus.OK).body(new GetRelationNotesResponse(relations));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<GetRelationNoteResponse> Get(@PathVariable String relationId, @PathVariable String id) {
+        var relationNote = relationNotesRepository.findById(id);
+
+        if (relationNote.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(new GetRelationNoteResponse(relationNote.get()));
     }
 
 

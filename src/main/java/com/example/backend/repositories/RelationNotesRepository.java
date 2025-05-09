@@ -10,5 +10,5 @@ import java.util.List;
 public interface RelationNotesRepository extends MongoRepository<RelationNote, String> {
 
     @Query("{ 'relationId' : ?0 }")
-    List<Relation> getAllByRelationId(String userId);
+    List<RelationNote> getAllByRelationId(String userId);
 }

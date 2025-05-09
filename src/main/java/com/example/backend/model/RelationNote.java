@@ -1,6 +1,5 @@
 package com.example.backend.model;
 
-import com.example.backend.dto.CreateRelation;
 import com.example.backend.dto.CreateRelationNote;
 import org.springframework.data.annotation.Id;
 
@@ -9,12 +8,14 @@ public class RelationNote {
     @Id
     private String id;
     private String relationId;
-    private String name;
+    private String title;
     private String note;
 
     static public RelationNote DtoToEntity(CreateRelationNote dto) {
         var relationNote = new RelationNote();
+        relationNote.title = dto.title();
         relationNote.note = dto.note();
+        relationNote.relationId = dto.relationId();
         return relationNote;
     }
 
@@ -26,8 +27,8 @@ public class RelationNote {
         return relationId;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getNote() {
